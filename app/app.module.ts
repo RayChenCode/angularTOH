@@ -1,11 +1,13 @@
 import {NgModule}      from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
-import {RouterModule, Routes} from '@angular/router';
+import {RouterModule} from '@angular/router';
+import {BrowserModule} from '@angular/platform-browser';
 
-import {HeroDetailComponent} from './hero-detail.component'
 import {AppComponent}  from './app.component';
 import {HeroesComponent} from "./heroes.component";
+import {DashboardComponent} from "./dashboard.component";
+import {HeroDetailComponent} from './hero-detail.component'
+
 import {HeroService} from "./hero.service";
 
 @NgModule({
@@ -17,13 +19,28 @@ import {HeroService} from "./hero.service";
         // 網址為[/heroes]時，使用此Component
         path: 'heroes',
         component: HeroesComponent
+      },
+      {
+        // 網址為[/heroes]時，使用此Component
+        path: 'dashboard',
+        component: DashboardComponent
+      },
+      {
+        path: 'detail/:id',
+        component: HeroDetailComponent
+      },
+      {
+        path: '',
+        redirectTo: '/dashboard',
+        pathMatch: 'full'
       }
     ])
   ],
   declarations: [
     AppComponent,
     HeroesComponent,
-    HeroDetailComponent
+    HeroDetailComponent,
+    DashboardComponent
   ],
   providers: [
     HeroService
