@@ -30,7 +30,7 @@ export class HeroDetailComponent implements OnInit {
   constructor(private heroService: HeroService,
               private location: Location,
               private activatedRoute: ActivatedRoute) {
-
+    console.log(module.id);
   }
 
   goBack(): void {
