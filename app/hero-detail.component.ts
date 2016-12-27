@@ -10,10 +10,12 @@ import {Hero} from './hero';
 @Component({
   moduleId: module.id,
   selector: 'my-hero-detail',
-  templateUrl: 'hero-detail.component.html'
+  templateUrl: 'hero-detail.component.html',
+  styleUrls: ['hero-detail.component.css']
 })
 
 export class HeroDetailComponent implements OnInit {
+  hero: Hero;
   ngOnInit(): void {
     this.activatedRoute.params
     /**
@@ -30,13 +32,16 @@ export class HeroDetailComponent implements OnInit {
   constructor(private heroService: HeroService,
               private location: Location,
               private activatedRoute: ActivatedRoute) {
-    console.log(module.id);
   }
 
   goBack(): void {
+    /**
+     * Going back too far could take us out of the application.
+     * That's acceptable in a demo. We'd guard against it in a real application,
+     * perhaps with the CanDeactivate guard of below.
+     *
+     * https://angular.io/docs/ts/latest/api/router/index/CanDeactivate-interface.html
+     */
     this.location.back();
   }
-
-  @Input()
-  hero: Hero;
 }
