@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
 
 import 'rxjs/add/operator/switchMap';
@@ -26,7 +26,10 @@ export class HeroDetailComponent implements OnInit {
       /**
        * 不需要unSubscribe這件事，當component被destroy時會自動unSubscribe
        */
-      .subscribe(hero => this.hero = hero);
+      .subscribe(hero => {
+        console.log(hero);
+        this.hero = hero
+      });
   }
 
   constructor(private heroService: HeroService,
