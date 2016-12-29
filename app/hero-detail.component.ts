@@ -16,7 +16,12 @@ import {Hero} from './hero';
 
 export class HeroDetailComponent implements OnInit {
   hero: Hero;
+
   ngOnInit(): void {
+    /**
+     * Routes path對應到時會產生此Component，
+     * 把參數[id]拿來找英雄
+     */
     this.activatedRoute.params
     /**
      * SwitchMap => operator [id] in the observable route parameter
@@ -27,7 +32,6 @@ export class HeroDetailComponent implements OnInit {
        * 不需要unSubscribe這件事，當component被destroy時會自動unSubscribe
        */
       .subscribe(hero => {
-        console.log(hero);
         this.hero = hero
       });
   }
