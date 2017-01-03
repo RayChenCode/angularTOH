@@ -1,7 +1,7 @@
 <h2>My heroes</h2>
 <div>
   <label>Hero name:</label> <input #heroName/>
-  <button (click)="add(heroName.value); heroName.value=''">
+  <button (click)="add(heroName.value); heroName.value='';">
     Add
   </button>
 
@@ -10,7 +10,10 @@
   <li *ngFor="let hero of heroes"
       [class.selected]="hero === selectedHero"
       (click)="onSelect(hero)">
-    <span class="badge">{{hero.id}}</span> {{hero.name}}
+    <span class="badge">{{hero.id}}</span>
+    <span>{{hero.name}}</span>
+    <button class="delete" (click)="delete(hero); $event.stopPropagation();">x</button>
+  </li>
 </ul>
 <div *ngIf="selectedHero">
   <!--That's the effect of the uppercasepipe -->

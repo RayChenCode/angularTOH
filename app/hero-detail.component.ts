@@ -39,19 +39,6 @@ export class HeroDetailComponent implements OnInit {
               private activatedRoute: ActivatedRoute) {
   }
 
-  add(name: String): void {
-    name = name.trim();
-    if (!name) {
-      return;
-    }
-
-    this.heroService.create(name)
-      .then(hero => {
-        this.heroes.push(hero);
-        this.selectedHero = null;
-      });
-  }
-
   save(): void {
     this.heroService.update(this.hero)
       .then(hero => this.goBack());

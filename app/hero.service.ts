@@ -1,7 +1,8 @@
 import {Injectable} from "@angular/core";
 import {Hero} from "./hero";
-import {Http, Headers} from "@angular/http";
+import {Http, Headers, Response} from "@angular/http";
 import "rxjs/add/operator/toPromise";
+import {Observable} from "rxjs";
 
 @Injectable()
 export class HeroService {
@@ -41,6 +42,12 @@ export class HeroService {
     return Promise.reject(error.message || error);
   };
 
+  search(term: string): Observable<Hero[]> {
+    return this.http
+      .get(`app/heroes/?name=${term}`)
+      .map((response: Response) => response.json().data as Hero[]);
+  }
+
   getHeroesSlowly(): Promise<Hero[]> {
     return new Promise(resolve => {
       setTimeout(() => resolve(this.getHeroes()), 2000);
@@ -56,7 +63,20 @@ export class HeroService {
       .post(this.heroesUrl, JSON.stringify({name: name}), {headers: this.headers})
       .toPromise()
       .then(response => {
-        return response.json().data
+        console.log(response, response.json(), response.json().data);
+        return response.json().data;
       })
+      .catch(this.handleError);
+  }
+
+  delete(id: number): Promise<Hero> {
+    const url = `${this.heroesUrl}/${id}`;
+    return this.http
+      .delete(url, {headers: this.headers})
+      .toPromise()
+      .then(response => {
+        return null;
+      })
+      .catch(this.handleError);
   }
 }

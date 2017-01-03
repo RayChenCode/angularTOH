@@ -1,0 +1,13 @@
+<div id="search-component">
+  <h4>Hero Search</h4>
+  <input #searchBox id="search-box" (keyup)="search(searchBox.value)"/>
+  <div>
+    <!-- ngFor對Observable什麼都做不了，
+    直到資料steam flow至async pipe中。-->
+    <div *ngFor="let hero of heroes | async"
+         (click)="gotoDetail(hero)"
+         class="search-result">
+      {{hero.name}}
+    </div>
+  </div>
+</div>
